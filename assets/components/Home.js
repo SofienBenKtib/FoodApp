@@ -7,6 +7,8 @@ import {
   Image,
   FlatList,
   TextInput,
+  TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -49,7 +51,11 @@ const Home = () => {
     );
   };
   return (
-    <View style={styles.container}>
+    <ScrollView
+      style={styles.container}
+      contentInsetAdjustmentBehavior="automatic"
+      showsVerticalScrollIndicator={false}
+    >
       {/********  Header  ********/}
       <SafeAreaView>
         <View style={styles.headerWrapper}>
@@ -88,12 +94,53 @@ const Home = () => {
       <View style={styles.popularWrapper}>
         <Text style={styles.popularText}>Popular</Text>
         {Popular.map((item) => (
-          <View>
-            <Text>heyy</Text>
+          <View style={styles.popularCardWrapper}>
+            <View>
+              <View>
+                <View
+                  style={[
+                    styles.popularTopdWrapper,
+                    {
+                      marginTop: item.id == 1 ? 10 : 20,
+                    },
+                  ]}
+                >
+                  <MaterialCommunityIcons
+                    name="crown"
+                    size={12}
+                    color={colors.primary}
+                  />
+                  <Text style={styles.popularTopOfTheWeek}>
+                    Top of the week
+                  </Text>
+                </View>
+                <View style={styles.popularTitlesWrapper}>
+                  <Text style={styles.popularTitlesTitle}>{item.title}</Text>
+                  <Text style={styles.popularTitlesWeight}>{item.weight}</Text>
+                </View>
+              </View>
+              <View style={styles.popularCardBottom}>
+                <TouchableOpacity style={styles.addButton}>
+                  <Feather name="plus" size={10} color={colors.textDark} />
+                </TouchableOpacity>
+
+                <View style={styles.ratingWrapper}>
+                  <MaterialCommunityIcons
+                    name="star"
+                    size={10}
+                    color={colors.textDark}
+                  />
+                  <Text style={styles.rating}>{item.rating}</Text>
+                </View>
+              </View>
+            </View>
+            <View style={styles.popularCardRight}>
+              <Image source={item.image} style={styles.popularCardImage} />
+            </View>
           </View>
         ))}
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -166,6 +213,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#F5CA48",
     marginRight: 20,
     borderRadius: 20,
+    shadowColor: colors.textDark,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.05,
+    shadowRadius: 10,
+    elevation: 0.5,
   },
   categoryItemImage: {
     width: 60,
@@ -199,5 +254,65 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     color: colors.textDark,
+  },
+  popularCardWrapper: {
+    backgroundColor: colors.background,
+    paddingTop: 20,
+    paddingLeft: 20,
+    borderRadius: 25,
+    flexDirection: "row",
+    overflow: "hidden",
+    shadowColor: colors.textDark,
+  },
+  popularTopOfTheWeek: {
+    marginLeft: 10,
+    fontSize: 14,
+  },
+  popularTopdWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  popularTitlesWrapper: {
+    marginTop: 20,
+  },
+  popularTitlesTitle: {
+    fontSize: 14,
+    color: colors.textDark,
+  },
+  popularTitlesWeight: {
+    fontSize: 12,
+    color: colors.textLght,
+    marginTop: 5,
+  },
+  popularCardBottom: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 10,
+    marginLeft: -20,
+  },
+  addButton: {
+    backgroundColor: colors.primary,
+    paddingHorizontal: 40,
+    paddingVertical: 20,
+    borderTopRightRadius: 25,
+    borderBottomLeftRadius: 25,
+  },
+  ratingWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginLeft: 20,
+  },
+  rating: {
+    fontSize: 12,
+    color: colors.textDark,
+    marginLeft: 5,
+  },
+  popularCardRight: {
+    marginLeft: 40,
+  },
+  popularCardImage: {
+    width: 210,
+    height: 125,
+    resizeMode: "contain",
   },
 });
