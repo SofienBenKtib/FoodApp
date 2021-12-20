@@ -16,7 +16,7 @@ import colors from "../colors/Colors";
 import Categories from "../data/Categories";
 import Popular from "../data/Popular";
 
-const Home = () => {
+const Home = ({ navigation }) => {
   const renderCategoryItem = ({ item }) => {
     return (
       <View
@@ -94,10 +94,14 @@ const Home = () => {
       <View style={styles.popularWrapper}>
         <Text style={styles.popularText}>Popular</Text>
         {Popular.map((item) => (
-          <View style={styles.popularCardWrapper}>
+          <TouchableOpacity
+            style={styles.popularCardWrapper}
+            onPress={() => navigation.navigate("Details", { item: item })}
+          >
             <View>
               <View>
                 <View
+                  key={item.id}
                   style={[
                     styles.popularTopdWrapper,
                     {
@@ -137,7 +141,7 @@ const Home = () => {
             <View style={styles.popularCardRight}>
               <Image source={item.image} style={styles.popularCardImage} />
             </View>
-          </View>
+          </TouchableOpacity>
         ))}
       </View>
     </ScrollView>
