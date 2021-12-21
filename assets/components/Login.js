@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 import colors from "../colors/Colors";
-
+import Signup from "./Signup";
 const Login = ({ navigation }) => {
   return (
     <View style={styles.container}>
@@ -58,7 +58,7 @@ const Login = ({ navigation }) => {
           <Text style={styles.text}>I forgot my password</Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
         <View style={styles.txtContainer}>
           <Text style={styles.text}>I don't have an account</Text>
         </View>

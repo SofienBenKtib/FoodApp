@@ -7,6 +7,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./assets/components/Home";
 import Details from "./assets/components/Details";
 import Login from "./assets/components/Login";
+import Signup from "./assets/components/Signup";
+
 const Stack = createNativeStackNavigator();
 export default function App() {
   return (
@@ -26,6 +28,17 @@ export default function App() {
           name="Login"
           component={Login}
           options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Signup"
+          component={Signup}
+          options={{
+            headerTintColor: colors.primary,
+            headerTitleAlign: "center",
+            headerStyle: {
+              backgroundColor: colors.textDark,
+            },
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>
